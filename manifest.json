@@ -1,0 +1,18 @@
+{
+   "background_page": "background.html",
+   "browser_action": {
+      "default_icon": "/icons/16.png"
+   },
+   "description": "Tool for sending XHR to Web Pages, RESTful Web Services. You can save/load 6 requests.",
+   "homepage_url": "https://chrome.google.com/webstore/detail/akdbimilobjkfhgamdhneckaifceicen",
+   "icons": {
+      "128": "/icons/128.png",
+      "16": "/icons/16.png",
+      "48": "/icons/48.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDsFRfnL7E3/zg2Rea3QAQVfBiYwbk1K5Yoc+x9UAXQBj3eM6zZdQeWnVML9fAIsrqmFkVHZsLf6PUo5PG93grnxMX4W+JCqUb0vGLwcQiaF5W85lWbi3zBPP3Obwr7J7iLjQmXagjH+0BnqpsvQahg/UXv7Q24htdsr7+OtA3+vwIDAQAB",
+   "name": "XHR POSTER",
+   "permissions": [ "http://*/", "https://*/", "tab" ],
+   "update_url": "http://clients2.google.com/service/update2/crx",
+   "version": "1.2.1"
+}

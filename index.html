@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>XHR POSTER</title>
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <link type="text/css" href="dojo/dojo/resources/dojo.css" rel="stylesheet"/>
+    <link type="text/css" href="dojo/dijit/themes/claro/claro.css" rel="stylesheet"/>
+    <script src="./dojo/dojo/dojo.js" data-dojo-config="parseOnLoad: false"></script>
+    <script src="./dojo/dojo/dojo_poster.js"></script>
+    <script src="js/default.js"></script>
+</head>
+<body class="claro">
+<div data-dojo-type="dijit.layout.BorderContainer" style="height:100%;width:100%;"
+     data-dojo-props="gutters:true, liveSpliiters:true, design:'sidebar'">
+<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'">
+    <div data-dojo-type="dijit.TitlePane" data-dojo-props="title:'Common Parameters'">
+        <form data-dojo-type="dijit.form.Form" id="formCommon">
+            <table style="width:100%">
+                <tr>
+                    <td colspan="4"><input type="text" data-dojo-type="dijit.form.ValidationTextBox"
+                                           data-dojo-props="required:true, placeHolder:'URL', style:'width:100%;', name:'url'">
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" data-dojo-type="dijit.form.TextBox"
+                               data-dojo-props="name:'user', placeHolder:'User Name', style:'width:100%;'"></td>
+                    <td><input type="password" data-dojo-type="dijit.form.TextBox"
+                               data-dojo-props="name:'password', placeHolder:'Password', style:'width:100%;'"></td>
+                    <td>Timeout(ms):</td>
+                    <td><input type="text" data-dojo-type="dijit.form.NumberSpinner"
+                               data-dojo-props="name:'timeout',value:30000, smallDelta:500, constraints:{min:1}, style:'width:100%;'">
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td><label for="openHeader">Open "Response Header" result pane:</label></td>
+                    <td><input type="checkbox" data-dojo-type="dijit.form.CheckBox" id="openHeader"
+                               data-dojo-props="name:'openHeader', value:true"></td>
+                    <td><label for="openRequest">Open "Request Data" result pane:</label></td>
+                    <td><input type="checkbox" data-dojo-type="dijit.form.CheckBox" id="openRequest"
+                               data-dojo-props="name:'openRequest', value:true"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <br>
+
+    <div data-dojo-type="dijit.TitlePane" data-dojo-props="title:'Actions'">
+        <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-request="GET">GET
+        </button>
+        <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-request="POST">POST
+        </button>
+        <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-request="PUT">PUT
+        </button>
+        <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-request="DELETE">
+            DELETE
+        </button>
+        <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-request="HEAD">HEAD
+        </button>
+        <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-request="OPTIONS">
+            OPTIONS
+        </button>
+        <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-request="PROPFIND">
+            PROPFIND
+        </button>
+        <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-request="COPY">COPY
+        </button>
+        <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-request="MOVE">MOVE
+        </button>
+    </div>
+    <br>
+
+    <div data-dojo-type="dijit.TitlePane" data-dojo-props="title:'HTTP Request Headers'">
+        <form data-dojo-type="dijit.form.Form" id="formHeaders">
+            <table style="width:100%">
+                <tr>
+                    <td><input type="text" data-dojo-type="dijit.form.TextBox"
+                               data-dojo-props="name:'Accept', placeHolder:'Accept', style:'width:100%'"></td>
+                    <td><input type="text" data-dojo-type="dijit.form.TextBox"
+                               data-dojo-props="name:'Content-Type', placeHolder:'Content-Type', style:'width:100%'">
+                    </td>
+                    <td><input type="text" data-dojo-type="dijit.form.TextBox"
+                               data-dojo-props="name:'Accept-Language', placeHolder:'Accept-Language', style:'width:100%'">
+                    </td>
+                    <td><input type="text" data-dojo-type="dijit.form.TextBox"
+                               data-dojo-props="name:'Cache-Control', placeHolder:'Cache-Control', style:'width:100%'">
+                    </td>
+                </tr>
+            </table>
+            <table style="width:100%">
+                <tr>
+                    <td style="width:90px">Other Headers:<br>(JSON format)</td>
+                    <td><input type="text" data-dojo-type="dijit.form.SimpleTextarea" id="otherHeaders"
+                               data-dojo-props="style: 'width:100%'"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <br>
+
+    <div data-dojo-type="dijit.TitlePane" data-dojo-props="title:'HTTP Entity Body'">
+        <input type="text" data-dojo-type="dijit.form.SimpleTextarea" id="formBody"
+               data-dojo-props="style:'width:100%; height:60px', name: 'content'">
+    </div>
+</div>
+<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'right', splitter:true, style:'width:40%;'">
+    <div data-dojo-type="dijit.layout.TabContainer" id="tab_response">
+    </div>
+</div>
+<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'bottom', splitter: true">
+    <table style="width: 100%";>
+        <tr>
+            <td>
+                <div>Default:</div>
+                <div>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="0">
+                        Save
+                    </button>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-load="0">
+                        Load
+                    </button>
+                </div>
+            </td>
+            <td width="15px">
+            </td>
+            <td>
+                <div>Save #1:</div>
+                <div>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="1">
+                        Save
+                    </button>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-load="1">
+                        Load
+                    </button>
+                </div>
+            </td>
+            <td width="15px">
+            </td>
+            <td>
+                <div>Save #2:</div>
+                <div>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="2">
+                        Save
+                    </button>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-load="2">
+                        Load
+                    </button>
+                </div>
+            </td>
+            <td width="15px">
+            </td>
+            <td>
+                <div>Save #3:</div>
+                <div>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="3">
+                        Save
+                    </button>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-load="3">
+                        Load
+                    </button>
+                </div>
+            </td>
+            <td width="15px">
+            </td>
+            <td>
+                <div>Save #4:</div>
+                <div>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="4">
+                        Save
+                    </button>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-load="4">
+                        Load
+                    </button>
+                </div>
+            </td>
+            <td width="15px">
+            </td>
+            <td>
+                <div>Save #5:</div>
+                <div>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="5">
+                        Save
+                    </button>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-load="5">
+                        Load
+                    </button>
+                </div>
+            </td>
+            <td width="15px">
+            </td>
+            <td>
+                <div>Switch series:</div>
+                <div>
+                    <select data-dojo-type="dijit.form.ComboBox" data-poster-event-type="change" data-poster-series-select="true" style="width: 120px;">
+                        <option>Default (1-5)</option>
+                    </select><br>
+                    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-showDialog="true">Create/Modify series</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+<div data-dojo-type="dijit.Dialog" data-dojo-id="seriesCreateDialog" data-dojo-props="title: 'Create/Modify series'">
+    <div>Change save data series name:</div>
+    <label for="seriesName">series name: </label>
+    <select data-dojo-type="dijit.form.ComboBox" data-poster-event-type="change" data-poster-series-selectForUpdate="true" style="width: 120px;">
+    </select>
+    <label for="newSeriesName">new series name: </label>
+    <input type="text" id="newSeriesName" data-dojo-type="dijit.form.TextBox" />
+    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-update="true">Delete</button>
+    <hr>
+    <div>Delete save data series:</div>
+    <label for="seriesName">series name: </label>
+    <select data-dojo-type="dijit.form.ComboBox" data-poster-event-type="change" data-poster-series-select="true" style="width: 120px;">
+    </select>
+    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-delete="true">Delete</button>
+    <hr>
+    <div>Create new save data series:</div>
+    <label for="seriesName">series name: </label>
+    <input type="text" id="seriesName" data-dojo-type="dijit.form.TextBox" />
+    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-create="true">Create</button>
+</div>
+</body>
+</html>
