@@ -12,8 +12,8 @@
     <link type="text/css" href="dojo/dojo/resources/dojo.css" rel="stylesheet"/>
     <link type="text/css" href="dojo/dijit/themes/claro/claro.css" rel="stylesheet"/>
     <script src="./dojo/dojo/dojo.js" data-dojo-config="parseOnLoad: false"></script>
-    <script src="./dojo/dojo/dojo_poster.js"></script>
-    <script src="js/default.js"></script>
+    <script src="./dojo/dojo/XHRPOSTER.js"></script>
+    <script src="./js/default.js"></script>
 </head>
 <body class="claro">
 <div data-dojo-type="dijit.layout.BorderContainer" style="height:100%;width:100%;"
@@ -115,7 +115,7 @@
     </div>
 </div>
 <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'bottom', splitter: true">
-    <table style="width: 100%";>
+    <table style="width: 100%;">
         <tr>
             <td>
                 <div>Default:</div>
@@ -131,7 +131,7 @@
             <td width="15px">
             </td>
             <td>
-                <div>Save #1:</div>
+                <div data-poster-series-save-label="true">Save #1:</div>
                 <div>
                     <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="1">
                         Save
@@ -144,7 +144,7 @@
             <td width="15px">
             </td>
             <td>
-                <div>Save #2:</div>
+                <div data-poster-series-save-label="true">Save #2:</div>
                 <div>
                     <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="2">
                         Save
@@ -157,7 +157,7 @@
             <td width="15px">
             </td>
             <td>
-                <div>Save #3:</div>
+                <div data-poster-series-save-label="true">Save #3:</div>
                 <div>
                     <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="3">
                         Save
@@ -170,7 +170,7 @@
             <td width="15px">
             </td>
             <td>
-                <div>Save #4:</div>
+                <div data-poster-series-save-label="true">Save #4:</div>
                 <div>
                     <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="4">
                         Save
@@ -183,7 +183,7 @@
             <td width="15px">
             </td>
             <td>
-                <div>Save #5:</div>
+                <div data-poster-series-save-label="true">Save #5:</div>
                 <div>
                     <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-save="5">
                         Save
@@ -198,8 +198,7 @@
             <td>
                 <div>Switch series:</div>
                 <div>
-                    <select data-dojo-type="dijit.form.ComboBox" data-poster-event-type="change" data-poster-series-select="true" style="width: 120px;">
-                        <option>Default (1-5)</option>
+                    <select data-dojo-type="dijit.form.ComboBox" data-dojo-props="labelAttr: 'label', searchAttr: 'value'" data-poster-event-type="change" data-poster-series-select="true" style="width: 120px;">
                     </select><br>
                     <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-showDialog="true">Create/Modify series</button>
                 </div>
@@ -209,24 +208,27 @@
 </div>
 </div>
 <div data-dojo-type="dijit.Dialog" data-dojo-id="seriesCreateDialog" data-dojo-props="title: 'Create/Modify series'">
+    <h2>Modify</h2>
     <div>Change save data series name:</div>
     <label for="seriesName">series name: </label>
-    <select data-dojo-type="dijit.form.ComboBox" data-poster-event-type="change" data-poster-series-selectForUpdate="true" style="width: 120px;">
+    <select data-dojo-type="dijit.form.ComboBox" data-dojo-props="labelAttr: 'label', searchAttr: 'value'" id="oldSeriesName" data-poster-event-type="change" data-poster-series-select="false" style="width: 120px;">
     </select>
     <label for="newSeriesName">new series name: </label>
     <input type="text" id="newSeriesName" data-dojo-type="dijit.form.TextBox" />
-    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-update="true">Delete</button>
+    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-update="{from: 'oldSeriesName', to: 'newSeriesName'}">Modify</button>
     <hr>
+    <h2>Delete</h2>
     <div>Delete save data series:</div>
     <label for="seriesName">series name: </label>
-    <select data-dojo-type="dijit.form.ComboBox" data-poster-event-type="change" data-poster-series-select="true" style="width: 120px;">
+    <select data-dojo-type="dijit.form.ComboBox" data-dojo-props="labelAttr: 'label', searchAttr: 'value'" id="deleteTarget" data-poster-event-type="change" data-poster-series-select="false" style="width: 120px;">
     </select>
-    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-delete="true">Delete</button>
+    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-delete="deleteTarget">Delete</button>
     <hr>
+    <h2>Create</h2>
     <div>Create new save data series:</div>
     <label for="seriesName">series name: </label>
     <input type="text" id="seriesName" data-dojo-type="dijit.form.TextBox" />
-    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-create="true">Create</button>
+    <button data-dojo-type="dijit.form.Button" data-poster-event-type="click" data-poster-series-create="seriesName">Create</button>
 </div>
 </body>
 </html>
