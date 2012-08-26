@@ -1,6 +1,7 @@
 dojo/dijit
 dojo/dojo
 dojo/dojox
+dojo/build-report.txt
 dojo-src/demos
 dojo-src/dijit
 dojo-src/dojo

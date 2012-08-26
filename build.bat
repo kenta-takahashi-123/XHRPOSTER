@@ -1,10 +1,4 @@
 cd /d %~dp0
-cd dojo-src/util/buildscripts
-build profile=XHRPOSTER action=release releaseDir="../../../" mini=true cssOptimize=comments
-cd ../../../dojo/
-rd /s /q dojox
-cd ../dijit/themes
-rd /s /q tundra
-rd /s /q soria
-rd /s /q nihilo
-pause
+cd
+copy /y dojo-src\XHRPOSTER.profile.js dojo-src\util\profiles\
+dojo-src\util\buildscripts\build profile=XHRPOSTER action=release releaseDir="../../../" mini=true cssOptimize=comments

@@ -251,6 +251,9 @@
 
       var refreshSeries = function (number) {
         var seriesList = dojo.fromJson(localStorage['seriesList']);
+        if (!seriesList) {
+          seriesList = [];
+        }
         var popCount = 0;
         for (var i=seriesList.length-1; i>=0; i--) {
           if (seriesList[i] === null) {
